@@ -277,7 +277,6 @@ $usePhpStan = confirm('Enable PhpStan?', true);
 $useLaravelPint = confirm('Enable Laravel Pint?', true);
 $useDependabot = confirm('Enable Dependabot?', true);
 $useLaravelRay = confirm('Use Ray for debugging?', true);
-$useUpdateChangelogWorkflow = confirm('Use automatic changelog updater workflow?', true);
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
@@ -291,7 +290,6 @@ writeln('Use Laravel/Pint     : '.($useLaravelPint ? 'yes' : 'no'));
 writeln('Use Larastan/PhpStan : '.($usePhpStan ? 'yes' : 'no'));
 writeln('Use Dependabot       : '.($useDependabot ? 'yes' : 'no'));
 writeln('Use Ray App          : '.($useLaravelRay ? 'yes' : 'no'));
-writeln('Use Auto-Changelog   : '.($useUpdateChangelogWorkflow ? 'yes' : 'no'));
 writeln('------');
 
 writeln('This script will replace the above values in all relevant files in the project directory.');
@@ -358,10 +356,6 @@ if (! $useDependabot) {
 
 if (! $useLaravelRay) {
     remove_composer_deps(['spatie/laravel-ray']);
-}
-
-if (! $useUpdateChangelogWorkflow) {
-    safeUnlink(__DIR__.'/.github/workflows/update-changelog.yml');
 }
 
 confirm('Execute `composer install` and run tests?') && run('composer install && composer test');
